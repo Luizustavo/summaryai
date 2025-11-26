@@ -9,18 +9,26 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "form-data": "^4.0.5",
+    "googleapis": "^166.0.0",
+    "mongodb": "^7.0.0",
     "next": "16.0.4",
+    "pdf2json": "^4.0.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/form-data": "^2.5.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.4",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }
