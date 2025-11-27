@@ -56,7 +56,7 @@ export async function processDriveFolder() {
         },
         meta: {
           discipline: String(aiResult.discipline || ''),
-          lectureNumber: Number(aiResult.lectureNumber) || null,
+          lectureNumber: Number(aiResult.lectureNumber) || undefined,
           theme: String(aiResult.theme || ''),
         },
       });

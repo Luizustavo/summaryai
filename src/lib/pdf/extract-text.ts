@@ -1,6 +1,23 @@
 // src/lib/pdf/extract-text.ts
 import PDFParser from "pdf2json";
 
+// Tipos para os dados do PDF
+interface PDFTextItem {
+  T: string;
+}
+
+interface PDFTextObject {
+  R?: PDFTextItem[];
+}
+
+interface PDFPage {
+  Texts?: PDFTextObject[];
+}
+
+interface PDFData {
+  Pages?: PDFPage[];
+}
+
 export async function extractTextFromBuffer(
   buffer: Buffer,
   mimeType: string
@@ -14,9 +31,12 @@ export async function extractTextFromBuffer(
   return new Promise((resolve, reject) => {
     const pdfParser = new (PDFParser)(null, true); // true = ignora erros de parsing
 
-    pdfParser.on("pdfParser_dataError", (errData: any) => {
-      console.error("Erro no parser PDF:", errData.parserError);
-      reject(new Error(`Falha ao processar PDF: ${errData.parserError}`));
+    pdfParser.on("pdfParser_dataError", (errData: Error | { parserError: Error }) => {
+      const errorMessage = errData instanceof Error 
+        ? errData.message 
+        : errData.parserError.message;
+      console.error("Erro no parser PDF:", errorMessage);
+      reject(new Error(`Falha ao processar PDF: ${errorMessage}`));
     });
 
     pdfParser.on("pdfParser_dataReady", () => {
@@ -24,7 +44,8 @@ export async function extractTextFromBuffer(
         let fullText = "";
 
         // Método robusto: percorre página por página
-        const pages = pdfParser?.data?.Pages || [];
+        const data = pdfParser.data as unknown as PDFData;
+        const pages = data?.Pages || [];
 
         if (!Array.isArray(pages) || pages.length === 0) {
           reject(new Error("PDF não contém páginas válidas ou está vazio."));
@@ -33,9 +54,9 @@ export async function extractTextFromBuffer(
 
         for (const page of pages) {
           if (page.Texts && Array.isArray(page.Texts)) {
-            const pageText = page.Texts.map((textObj: any) => {
+            const pageText = page.Texts.map((textObj: PDFTextObject) => {
               if (textObj.R && Array.isArray(textObj.R)) {
-                return textObj.R.map((r: any) => {
+                return textObj.R.map((r: PDFTextItem) => {
                   try {
                     // Decodifica URI component com segurança
                     return decodeURIComponent(r.T || "");
@@ -46,7 +67,7 @@ export async function extractTextFromBuffer(
               }
               return "";
             })
-              .filter((text) => text.trim().length > 0)
+              .filter((text: string) => text.trim().length > 0)
               .join(" ")
               .trim();
 

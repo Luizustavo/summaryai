@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import { MongoClient, ServerApiVersion, Db } from 'mongodb';
 
 const uri = process.env.MONGODB_URI!;
 
@@ -26,7 +26,7 @@ export const DATABASE_NAME = 'faqdb';
 
 // Cache da conexão para ambientes serverless
 let cachedClient: MongoClient | null = null;
-let cachedDb: any = null;
+let cachedDb: Db | null = null;
 
 export async function connectToDatabase() {
   if (cachedClient && cachedDb) {
