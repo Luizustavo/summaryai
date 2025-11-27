@@ -414,7 +414,7 @@ export default function FAQPage() {
 
             {/* Conteúdo */}
             <div className="overflow-y-auto p-4 sm:p-8 bg-slate-50">
-              <div className="prose prose-slate prose-sm max-w-none bg-white rounded-lg p-4 sm:p-8 shadow-sm">
+              <div className="prose prose-slate prose-sm max-w-none bg-white rounded-lg px-4 pb-4 sm:px-8 sm:pb-8 shadow-sm">
                 <div 
                   className="text-slate-700 leading-loose text-justify text-sm sm:text-base"
                   style={{ whiteSpace: 'pre-line' }}
