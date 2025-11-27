@@ -1,10 +1,10 @@
-# 📚 Agente FAQ IA
+# 📚 SummaryAI
 
 Sistema inteligente de geração automática de resumos acadêmicos a partir de arquivos PDF armazenados no Google Drive, utilizando IA para criar conteúdo estruturado e organizado.
 
 ## 🎯 Visão Geral
 
-O **Agente FAQ IA** é uma aplicação Next.js que automatiza o processo de:
+O **SummaryAI** é uma aplicação Next.js que automatiza o processo de:
 1. **Extração** de arquivos PDF do Google Drive
 2. **Processamento** do conteúdo dos PDFs
 3. **Geração** de títulos e resumos inteligentes usando IA (Groq/LLaMA 3.1)
@@ -87,7 +87,7 @@ O **Agente FAQ IA** é uma aplicação Next.js que automatiza o processo de:
 ### 1. Clone o repositório
 ```bash
 git clone <seu-repositorio>
-cd agente-faq-ia
+cd summaryai
 ```
 
 ### 2. Instale as dependências
@@ -133,7 +133,7 @@ Acesse [http://localhost:3000](http://localhost:3000)
 ## 📁 Estrutura do Projeto
 
 ```
-agente-faq-ia/
+summaryai/
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx                 # Página principal (listagem)
@@ -179,10 +179,13 @@ agente-faq-ia/
 7. **Armazenamento**: Salva no MongoDB (database `faqdb`)
 8. **Visualização**: Interface lista e categoriza automaticamente
 
-### Sincronização Manual
+### 🔄 Sincronização com Google Drive
 
-Um **botão "Sincronizar"** está disponível no header da aplicação:
-- Ícone de refresh que anima durante sincronização
+A aplicação oferece **sincronização automática e manual** com o Google Drive:
+
+**Sincronização Manual:**
+- Botão "Sincronizar" disponível no header
+- Ícone de refresh que anima durante processamento
 - Chama a rota `/api/cron/sync-drive`
 - Recarrega automaticamente a lista após sincronização
 - Exibe mensagem de sucesso/erro
