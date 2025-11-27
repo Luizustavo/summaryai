@@ -43,7 +43,7 @@ Retorne sua resposta em formato JSON com os seguintes campos: "title", "summary"
 
 O campo "summary" DEVE seguir EXATAMENTE o seguinte padrão narrativo (em português do Brasil):
 
-> **INTRODUÇÃO**  
+> **Introdução**  
 > [Frase de abertura que define o tema central com clareza]. Nesta aula, vamos explorar [principais tópicos], que são fundamentais na disciplina de [disciplina]. [Explicação breve do porquê esses conceitos são importantes]. Além disso, vamos discutir [outro conceito-chave], que [descreva sua função ou relevância]. Vamos explorar esses temas e sua aplicação através de exemplos práticos.
 
 > **Contexto**: [1–2 frases sobre relevância acadêmica e profissional.]
@@ -72,7 +72,7 @@ ${trimmed}`;
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
+        model: "llama-3.3-70b-versatile",
         messages: [{ role: "user", content: prompt }],
         temperature: 0.6,
         response_format: { type: "json_object" },
